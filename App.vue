@@ -12,6 +12,6 @@
 	}
 </script>
 
-<style>
+<style scoped="scss">
 	/*每个页面公共css */
-</style>
+</style> 
