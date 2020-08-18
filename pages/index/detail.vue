@@ -46,7 +46,7 @@
 		data() {
 			return {
 				list:[],
-				loadingType:'more',
+				loadingType:'nomore',
 				pageNum:0,
 				pageSize:10,
 				url:'',
@@ -54,32 +54,30 @@
 			};
 		},
 		onLoad(options){
-			if(options.type==='1'){
+			if(options.type=='1'){
 				uni.setNavigationBarTitle({
 					title: '双色球历史开奖'
 				});
 				this.type=1;
-				this.url='/api/two/all'
-			}else if(options.type==='2'){
+			}else if(options.type=='2'){
 				uni.setNavigationBarTitle({
 					title: '大乐透历史开奖'
 				});
 				this.type=2;
-				this.url='/api/lottery/all'
 			}else{
 				uni.setNavigationBarTitle({
 					title: '七星彩历史开奖'
 				});
 				this.type=3;
-				this.url='/api/colorful/all'
 			}
+			this.list = JSON.parse(decodeURIComponent(options.list)).reverse()
 
 		},
 		created() {
-			this.loadData()
 		},
 		methods:{
 			loadData(){
+				return
 				if (this.loadingType === 'loading') {
 					//防止重复加载
 					return;

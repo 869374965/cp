@@ -42,6 +42,14 @@
 				"navigationBarTitleText": "七星彩选号"
 			}
         }
+        ,{
+            "path" : "pages/index/result",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/index/detail",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
