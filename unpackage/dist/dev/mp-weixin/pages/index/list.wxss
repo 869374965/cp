@@ -25,10 +25,13 @@
 /* 透明度 */
 /* 文章场景相关 */
 .wrap.data-v-fc532118 {
-  min-height: 100vh;
+  height: 100vh;
   padding: 1rpx 0;
   width: 100vw;
   background: #ff5733;
+}
+.my-scroll-view.data-v-fc532118 {
+  height: 100%;
 }
 .cell-wrap.data-v-fc532118 {
   border-radius: 20rpx;
@@ -107,7 +110,7 @@
   height: 50rpx;
   padding: 10rpx;
   border-radius: 50rpx;
-  font-size: 24rpx;
+  font-size: 34rpx;
 }
 .ball.data-v-fc532118:not(:first-child) {
   margin-left: 10rpx;

@@ -54,13 +54,14 @@
 			};
 		},
 		onLoad(options){
-			if(options.type==='1'){
+			console.log(options)
+			if(options.type=='1'){
 				uni.setNavigationBarTitle({
 					title: '双色球历史开奖'
 				});
 				this.type=1;
 				this.url='/api/two/all'
-			}else if(options.type==='2'){
+			}else if(options.type=='2'){
 				uni.setNavigationBarTitle({
 					title: '大乐透历史开奖'
 				});
@@ -73,9 +74,6 @@
 				this.type=3;
 				this.url='/api/colorful/all'
 			}
-
-		},
-		created() {
 			this.loadData()
 		},
 		methods:{
@@ -90,6 +88,7 @@
 					pageSize:this.pageSize,
 					pageNum:this.pageNum
 				}
+				console.log(this.url)
 				this.$http.post(this.url,params).then(res => {
 					if (!res.data.list) {
 						this.loadingType = 'nomore';

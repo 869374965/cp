@@ -4,14 +4,17 @@
 			根据大数据显示，您查询的号码：
 		</view>
 		<view class="ball-wrap" v-if="type!==3">
-			<text class="ball red" v-for="(item,i) in result.red" :key="'red'+i">{{item}}</text>
-			<text class="ball blue" v-for="(item,i) in result.blue" :key="'blue'+i">{{item}}</text>
+			<text class="ball red" v-for="(item,i) in result.red" :key="i">{{item}}</text>
+			<text class="ball blue" v-for="(item,i) in result.blue" :key="i">{{item}}</text>
 		</view>
 		<view v-else>
-			<view class="ball-wrap" v-for="(item,i) in ballList" :key="'ballList'+i">
-				<text class="ball red" v-for="(v,i) in item.split(',')" :key="'red'+i">{{v}}</text>
-			</view>
+			<scroll-view scroll-y class="my-scroll-view">
+				<view class="ball-wrap" v-for="(item,i) in ballList" :key="i">
+					<text class="ball red" v-for="(v,j) in item" :key="j">{{v}}</text>
+				</view>
+			</scroll-view>
 		</view>
+
 		<view class="title">历史开出详情</view>
 
 
@@ -148,15 +151,15 @@
 		</view>
 		<view class="result-wrap">
 			<view class="ball-wrap">
-				<text class="ball red" v-for="(item,i) in random1.red" :key="'redrandom1'+i">{{item}}</text>
-				<text class="ball blue" v-for="(item,i) in random1.blue" :key="'bluerandom1'+i">{{item}}</text>
+				<text class="ball red" v-for="(item,i) in random1.red" :key="i">{{item}}</text>
+				<text class="ball blue" v-for="(item,i) in random1.blue" :key="i">{{item}}</text>
 			</view>
 			<view class="ball-wrap">
-				<text class="ball red" v-for="(item,i) in random2.red" :key="'redrandom2'+i">{{item}}</text>
-				<text class="ball blue" v-for="(item,i) in random2.blue" :key="'bluerandom2'+i">{{item}}</text>
+				<text class="ball red" v-for="(item,i) in random2.red" :key="i">{{item}}</text>
+				<text class="ball blue" v-for="(item,i) in random2.blue" :key="i">{{item}}</text>
 			</view>
 		</view>
-		<button class="btn" type="primary" @click.native="getRandom">换一换</button>
+		<button class="btn" type="default" @click.native="getRandom">换一换</button>
 	</view>
 </template>
 
@@ -202,21 +205,27 @@
 				});
 				this.type = 3;
 				this.url = '/api/colorful/random'
-				this.ballList = JSON.parse(decodeURIComponent(options.ballList))
+				this.ballList = JSON.parse(decodeURIComponent(options.ballList)).map(item => {
+					return item.split(',')
+				})
 				console.log(this.ballList)
 			}
-
-
 			this.getRandom()
 		},
 		methods: {
 			getRandom() {
-				if(this.type==1){
-					this.$http.post('/api/point/save',{type:'s-random'})
-				}else if(this.type==2){
-					this.$http.post('/api/point/save',{type:'d-random'})
-				}else if(this.type==3){
-					this.$http.post('/api/point/save',{type:'q-random'})
+				if (this.type == 1) {
+					this.$http.post('/api/point/save', {
+						type: 's-random'
+					})
+				} else if (this.type == 2) {
+					this.$http.post('/api/point/save', {
+						type: 'd-random'
+					})
+				} else if (this.type == 3) {
+					this.$http.post('/api/point/save', {
+						type: 'q-random'
+					})
 				}
 				this.$http.post(this.url).then(res => {
 					let {
@@ -266,10 +275,14 @@
 	}
 
 	.ball-wrap {
-		margin-top: 20rpx;
+		margin-bottom: 10rpx;
 		display: flex;
 		flex-flow: row wrap;
 		align-items: center;
+
+		&:last-child {
+			padding-bottom: 10rpx;
+		}
 	}
 
 	.ball {
@@ -282,8 +295,8 @@
 		border-radius: 50rpx;
 		font-size: 34rpx;
 		background: #fff;
-			margin-right: 10rpx;
-			margin-top: 10rpx;
+		margin-right: 10rpx;
+		margin-top: 10rpx;
 
 		&.red {
 			color: red;
@@ -295,7 +308,7 @@
 	}
 
 	.table {
-		padding: 20rpx 0;
+		padding: 20rpx;
 		display: flex;
 		align-items: flex-start;
 		justify-content: space-around;
@@ -304,13 +317,14 @@
 		color: #333;
 
 		.cell {
+			flex: 1;
 			display: flex;
 			flex-flow: column;
 			align-items: center;
 			justify-content: center;
 
-			&:first-child {
-				align-items: flex-start;
+			&:not(:last-child) {
+				border-right: 1px solid $bgColor;
 			}
 
 			&:last-child {
@@ -318,8 +332,16 @@
 			}
 
 			text {
+				display: inline-block;
+				width: 100%;
+				box-sizing: border-box;
+				padding: 10rpx;
+				text-align: center;
+				// border: 1px solid $bgColor;
+
 				&:not(:first-child) {
-					margin-top: 10rpx;
+					// border-top: 1px solid $bgColor;
+					// border-right: 1px solid $bgColor;
 				}
 			}
 		}
@@ -327,5 +349,23 @@
 
 	.btn {
 		margin: 40rpx 0;
+	}
+
+	.my-scroll-view {
+		padding: 10rpx;
+		border-radius: 10rpx;
+		border: 1px solid #fff;
+		max-height: 40vh;
+		box-sizing: border-box;
+		overflow: hidden;
+
+	}
+	
+	button {
+		font-size: 34rpx;
+		background: #2a82e4;
+		color: #fff;
+		padding: 0 20rpx;
+		margin: 40rpx 20rpx 20rpx;
 	}
 </style>

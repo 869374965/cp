@@ -1,6 +1,6 @@
 import request from "./request";
 // 全局配置的请求域名
-let baseUrl = "";
+let baseUrl = "https://yzch.zzxtit.com/lottery";
 //可以new多个request来支持多个域名请求
 let $http = new request({
 	//接口请求地址
@@ -16,7 +16,7 @@ let $http = new request({
 	// 默认配置（可不写）
 	config: {
 		// 是否自动提示错误
-		isPrompt: true,
+		isPrompt: false,
 		// 是否显示加载动画
 		load: true,
 		// 是否使用数据工厂
@@ -52,7 +52,7 @@ $http.requestStart = function(options) {
 		if (requestNum <= 0) {
 			//打开加载动画
 			uni.showLoading({
-				title: '加载中',
+				title: '计算中...',
 				mask: true
 			});
 		}

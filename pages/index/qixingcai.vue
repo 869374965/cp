@@ -5,53 +5,62 @@
 			<view class="cell">
 				<text class="name">第1位</text>
 				<view class="ball-wrap">
-					<text class="ball red" :class="item.checked?'checked':''" @click="chooseBall(item,1)" v-for="(item,i) in red1" :key="'red1'+i">{{item.num}}</text>
+					<text class="ball red" :class="item.checked?'checked':''" @click="chooseBall(item,1)" v-for="(item,i) in red1"
+					 :key="i">{{item.num}}</text>
 				</view>
 			</view>
 			<view class="cell">
 				<text class="name">第2位</text>
 				<view class="ball-wrap">
-					<text class="ball red" :class="item.checked?'checked':''" @click="chooseBall(item,2)" v-for="(item,i) in red2" :key="'red2'+i">{{item.num}}</text>
+					<text class="ball red" :class="item.checked?'checked':''" @click="chooseBall(item,2)" v-for="(item,i) in red2"
+					 :key="i">{{item.num}}</text>
 				</view>
 			</view>
 			<view class="cell">
 				<text class="name">第3位</text>
 				<view class="ball-wrap">
-					<text class="ball red" :class="item.checked?'checked':''" @click="chooseBall(item,3)" v-for="(item,i) in red3" :key="'red3'+i">{{item.num}}</text>
+					<text class="ball red" :class="item.checked?'checked':''" @click="chooseBall(item,3)" v-for="(item,i) in red3"
+					 :key="i">{{item.num}}</text>
 				</view>
 			</view>
 			<view class="cell">
 				<text class="name">第4位</text>
 				<view class="ball-wrap">
-					<text class="ball red" :class="item.checked?'checked':''" @click="chooseBall(item,4)" v-for="(item,i) in red4" :key="'red4'+i">{{item.num}}</text>
+					<text class="ball red" :class="item.checked?'checked':''" @click="chooseBall(item,4)" v-for="(item,i) in red4"
+					 :key="i">{{item.num}}</text>
 				</view>
 			</view>
 			<view class="cell">
 				<text class="name">第5位</text>
 				<view class="ball-wrap">
-					<text class="ball red" :class="item.checked?'checked':''" @click="chooseBall(item,5)" v-for="(item,i) in red5" :key="'red5'+i">{{item.num}}</text>
+					<text class="ball red" :class="item.checked?'checked':''" @click="chooseBall(item,5)" v-for="(item,i) in red5"
+					 :key="i">{{item.num}}</text>
 				</view>
 			</view>
 			<view class="cell">
 				<text class="name">第6位</text>
 				<view class="ball-wrap">
-					<text class="ball red" :class="item.checked?'checked':''" @click="chooseBall(item,6)" v-for="(item,i) in red6" :key="'red6'+i">{{item.num}}</text>
+					<text class="ball red" :class="item.checked?'checked':''" @click="chooseBall(item,6)" v-for="(item,i) in red6"
+					 :key="i">{{item.num}}</text>
 				</view>
 			</view>
 			<view class="cell">
 				<text class="name">第7位</text>
 				<view class="ball-wrap">
-					<text class="ball red" :class="item.checked?'checked':''" @click="chooseBall(item,7)" v-for="(item,i) in red7" :key="'red7'+i">{{item.num}}</text>
+					<text class="ball red" :class="item.checked?'checked':''" @click="chooseBall(item,7)" v-for="(item,i) in red7"
+					 :key="i">{{item.num}}</text>
 				</view>
 			</view>
 		</view>
 		<view class="title" v-if="ballList.length>0">您的选号</view>
-		<view class="result" v-if="ballList.length>0">
-			<view class="result-cell" v-for="(item,i) in ballList" :key="'ballList'+i">
-				<text class="ball red" v-for="(v,j) in item" :key="'v'+j">{{v}}</text>
+		<scroll-view v-if="ballList.length>0" scroll-y class="my-scroll-view">
+			<view class="result">
+				<view class="result-cell" v-for="(item,i) in ballList" :key="i">
+					<text class="ball red" v-for="(v,j) in item" :key="j">{{v}}</text>
+				</view>
 			</view>
-		</view>
-		
+		</scroll-view>
+
 		<view class="clear" @click="clear">
 			<image src="../../static/image/lajix.svg" mode=""></image>
 			<text>清空选号</text>
@@ -107,15 +116,15 @@
 				red5: [],
 				red6: [],
 				red7: [],
-				checkedBall1:[],
-				checkedBall2:[],
-				checkedBall3:[],
-				checkedBall4:[],
-				checkedBall5:[],
-				checkedBall6:[],
-				checkedBall7:[],
+				checkedBall1: [],
+				checkedBall2: [],
+				checkedBall3: [],
+				checkedBall4: [],
+				checkedBall5: [],
+				checkedBall6: [],
+				checkedBall7: [],
 				ballList: [],
-				
+
 			};
 		},
 		created() {
@@ -128,17 +137,18 @@
 			this.red7 = JSON.parse(JSON.stringify(this.red))
 		},
 		methods: {
-			chooseBall(item,pos) {
+			chooseBall(item, pos) {
 				item.checked = !item.checked
 				if (!item.checked) {
-					this['checkedBall'+pos].remove(item.num)
-				}else{
-					this['checkedBall'+pos].push(item.num)
+					this['checkedBall' + pos].remove(item.num)
+				} else {
+					this['checkedBall' + pos].push(item.num)
 				}
-				if(this.checkedBall1.length>0&&this.checkedBall2.length>0&&this.checkedBall3.length>0&&this.checkedBall4.length>0&&this.checkedBall5.length>0&&this.checkedBall6.length>0&&this.checkedBall7.length>0){
-					this.disabled=false
-				}else{
-					this.disabled=true
+				if (this.checkedBall1.length > 0 && this.checkedBall2.length > 0 && this.checkedBall3.length > 0 && this.checkedBall4
+					.length > 0 && this.checkedBall5.length > 0 && this.checkedBall6.length > 0 && this.checkedBall7.length > 0) {
+					this.disabled = false
+				} else {
+					this.disabled = true
 				}
 			},
 			nextStep() {
@@ -149,15 +159,15 @@
 					})
 					return
 				}
-				
-				this.checkedBall1.forEach(v1=>{
-					this.checkedBall2.forEach(v2=>{
-						this.checkedBall3.forEach(v3=>{
-							this.checkedBall4.forEach(v4=>{
-								this.checkedBall5.forEach(v5=>{
-									this.checkedBall6.forEach(v6=>{
-										this.checkedBall7.forEach(v7=>{
-											let arr = [v1,v2,v3,v4,v5,v6,v7]
+
+				this.checkedBall1.forEach(v1 => {
+					this.checkedBall2.forEach(v2 => {
+						this.checkedBall3.forEach(v3 => {
+							this.checkedBall4.forEach(v4 => {
+								this.checkedBall5.forEach(v5 => {
+									this.checkedBall6.forEach(v6 => {
+										this.checkedBall7.forEach(v7 => {
+											let arr = [v1, v2, v3, v4, v5, v6, v7]
 											this.ballList.push(arr)
 										})
 									})
@@ -166,18 +176,20 @@
 						})
 					})
 				})
-				this.disabled=true
-				this.disabled2=false;
+				this.disabled = true
+				this.disabled2 = false;
 				this.clearChecked()
-				
+
 			},
-			search(){
-				if(this.disabled2){
+			search() {
+				if (this.disabled2) {
 					return
 				}
-				this.$http.post('/api/point/save',{type:'q-find'})
+				this.$http.post('/api/point/save', {
+					type: 'q-find'
+				})
 				let arr = []
-				this.ballList.forEach(item=>{
+				this.ballList.forEach(item => {
 					arr.push(item.join(','))
 				})
 				let params = {
@@ -185,19 +197,20 @@
 				}
 				this.$http.post('/api/colorful/result', params).then(res => {
 					uni.navigateTo({
-						url: '/pages/index/result?type=3&ballList='+encodeURIComponent(JSON.stringify(arr))+'&result=' + encodeURIComponent(JSON.stringify(res.data))
+						url: '/pages/index/result?type=3&ballList=' + encodeURIComponent(JSON.stringify(arr)) + '&result=' +
+							encodeURIComponent(JSON.stringify(res.data))
 					});
 				})
 			},
-			clearChecked(){
-				this.red1.forEach(v=>v.checked=false)
-				this.red2.forEach(v=>v.checked=false)
-				this.red3.forEach(v=>v.checked=false)
-				this.red4.forEach(v=>v.checked=false)
-				this.red5.forEach(v=>v.checked=false)
-				this.red6.forEach(v=>v.checked=false)
-				this.red7.forEach(v=>v.checked=false)
-				
+			clearChecked() {
+				this.red1.forEach(v => v.checked = false)
+				this.red2.forEach(v => v.checked = false)
+				this.red3.forEach(v => v.checked = false)
+				this.red4.forEach(v => v.checked = false)
+				this.red5.forEach(v => v.checked = false)
+				this.red6.forEach(v => v.checked = false)
+				this.red7.forEach(v => v.checked = false)
+
 				this.checkedBall1 = []
 				this.checkedBall2 = []
 				this.checkedBall3 = []
@@ -206,15 +219,15 @@
 				this.checkedBall6 = []
 				this.checkedBall7 = []
 			},
-			clear(){
-				this.red1.forEach(v=>v.checked=false)
-				this.red2.forEach(v=>v.checked=false)
-				this.red3.forEach(v=>v.checked=false)
-				this.red4.forEach(v=>v.checked=false)
-				this.red5.forEach(v=>v.checked=false)
-				this.red6.forEach(v=>v.checked=false)
-				this.red7.forEach(v=>v.checked=false)
-				
+			clear() {
+				this.red1.forEach(v => v.checked = false)
+				this.red2.forEach(v => v.checked = false)
+				this.red3.forEach(v => v.checked = false)
+				this.red4.forEach(v => v.checked = false)
+				this.red5.forEach(v => v.checked = false)
+				this.red6.forEach(v => v.checked = false)
+				this.red7.forEach(v => v.checked = false)
+
 				this.checkedBall1 = []
 				this.checkedBall2 = []
 				this.checkedBall3 = []
@@ -222,11 +235,11 @@
 				this.checkedBall5 = []
 				this.checkedBall6 = []
 				this.checkedBall7 = []
-				
-				this.ballList=[]
-				
-				this.disabled=true
-				this.disabled2=true;
+
+				this.ballList = []
+
+				this.disabled = true
+				this.disabled2 = true;
 			}
 		}
 	}
@@ -257,15 +270,17 @@
 	.cell {
 		display: flex;
 		flex-flow: column;
-		&:not(:first-child){
+
+		&:not(:first-child) {
 			margin-top: 20rpx;
 		}
 
 		.name {
 			font-size: 24rpx;
-			color:#666;
+			color: #666;
 		}
-		.ball-wrap{
+
+		.ball-wrap {
 			display: flex;
 		}
 	}
@@ -277,12 +292,12 @@
 	}
 
 	.ball {
-		width: 40rpx;
-		height: 40rpx;
+		width: 44rpx;
+		height: 44rpx;
 		padding: 10rpx;
 		font-size: 30rpx;
 		font-weight: bold;
-		border-radius: 40rpx;
+		border-radius: 44rpx;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -321,33 +336,50 @@
 		display: flex;
 		flex-flow: column;
 	}
-	.result-cell{
+
+	.result-cell {
 		display: flex;
 		flex-flow: row wrap;
 		margin-bottom: 10rpx;
+		&:last-child{
+			padding-bottom: 10rpx;
+		}
 	}
-	.btn-wrap{
+
+	.btn-wrap {
 		margin: 30rpx 0;
 		display: flex;
 		flex-flow: column;
 	}
+
 	.btn {
 		margin-bottom: 20rpx;
-		width:100%;
+		width: 100%;
 	}
-	
-	.clear{
-		position:absolute;
-		top:20rpx;
-		right:20rpx;
+
+	.clear {
+		position: absolute;
+		top: 20rpx;
+		right: 20rpx;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		font-size: 26rpx;
-		color:$bgColor;
-		image{
+		color: $bgColor;
+
+		image {
 			width: 30rpx;
 			height: 30rpx;
 		}
+	}
+
+
+	.my-scroll-view {
+		padding:10rpx;
+		border-radius: 10rpx;
+		border: 1px solid #fff;
+		max-height: 40vh;
+		box-sizing: border-box;
+		overflow: hidden;
 	}
 </style>

@@ -67,7 +67,7 @@ swiper.data-v-57280228 {
   color: #333;
 }
 .cell-wrap .cell .time.data-v-57280228 {
-  margin-top: 10rpx;
+  margin-left: 10rpx;
   font-size: 26rpx;
   color: #666;
 }
@@ -110,11 +110,11 @@ swiper.data-v-57280228 {
   -webkit-justify-content: center;
           justify-content: center;
   color: #fff;
-  width: 50rpx;
-  height: 50rpx;
+  width: 40rpx;
+  height: 40rpx;
   padding: 10rpx;
-  border-radius: 50rpx;
-  font-size: 24rpx;
+  border-radius: 40rpx;
+  font-size: 30rpx;
 }
 .ball.data-v-57280228:not(:first-child) {
   margin-left: 10rpx;

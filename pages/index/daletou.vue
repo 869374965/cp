@@ -2,16 +2,16 @@
 	<view class="wrap">
 		<text class="tip">至少选择5个红球，2个蓝球</text>
 		<view class="top">
-			<text class="ball red" :class="item.checked?'checked':''" @click="chooseRed(item)" v-for="(item,i) in allRed" :key="'allRed'+i">{{item.num}}</text>
+			<text class="ball red" :class="item.checked?'checked':''" @click="chooseRed(item)" v-for="(item,i) in allRed" :key="i">{{item.num}}</text>
 		</view>
 		<view class="bottom">
-			<text class="ball blue" :class="item.checked?'checked':''" v-for="(item,i) in allBlue" :key="'allBlue'+i" @click="chooseBlue(item)">{{item.num}}</text>
+			<text class="ball blue" :class="item.checked?'checked':''" v-for="(item,i) in allBlue" :key="i" @click="chooseBlue(item)">{{item.num}}</text>
 		</view>
 
 		<view class="title" v-if="redList.length>0">您的选号</view>
 		<view class="result" v-if="redList.length>0">
-			<text class="ball red" v-for="(item,i) in redList" :key="'redList'+i">{{item}}</text>
-			<text class="ball blue" v-for="(item,i) in blueList" :key="'blueList'+i">{{item}}</text>
+			<text class="ball red" v-for="(item,i) in redList" :key="i">{{item}}</text>
+			<text class="ball blue" v-for="(item,i) in blueList" :key="i">{{item}}</text>
 		</view>
 		<view class="clear" @click="clear">
 			<image src="../../static/image/lajix.svg" mode=""></image>

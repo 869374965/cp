@@ -5,7 +5,7 @@
 				<view class="page-section-spacing">
 					<swiper class="swiper" :indicator-dots="true" :autoplay="true" :interval="2000" :duration="500" :circular="true"
 					 indicator-active-color="#fff">
-						<swiper-item v-for="(item,i) in images" :key="'imgs'+i">
+						<swiper-item v-for="(item,i) in images" :key="i">
 							<image class="swiper-image" :src="item.url"></image>
 						</swiper-item>
 					</swiper>
@@ -17,7 +17,7 @@
 			<view class="cell">
 				<view>
 					<text class="title">双色球</text>
-					<text class="time">第{{data.two.id}}期 {{data.two.time}}</text>
+					<text class="time" v-if="data.two.id">第{{data.two.id}}期 {{data.two.time}}</text>
 				</view>
 				<view class="ball-wrap">
 					<text class="ball red">{{data.two.redFirst}}</text>
@@ -38,7 +38,7 @@
 			<view class="cell">
 				<view>
 					<text class="title">大乐透</text>
-					<text class="time">第{{data.lottery.id}}期 {{data.lottery.time}}</text>
+					<text class="time" v-if="data.lottery.id">第{{data.lottery.id}}期 {{data.lottery.time}}</text>
 				</view>
 				<view class="ball-wrap">
 					<text class="ball red">{{data.lottery.redFirst}}</text>
@@ -58,7 +58,7 @@
 			<view class="cell">
 				<view>
 					<text class="title">七星彩</text>
-					<text class="time">第{{data.colorful.id}}期 {{data.colorful.time}}</text>
+					<text class="time" v-if="data.colorful.id">第{{data.colorful.id}}期 {{data.colorful.time}}</text>
 				</view>
 				<view class="ball-wrap">
 					<text class="ball red">{{data.colorful.redFirst}}</text>

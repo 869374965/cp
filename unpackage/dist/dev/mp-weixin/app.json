@@ -6,7 +6,9 @@
     "pages/index/choose",
     "pages/index/shuangseqiu",
     "pages/index/daletou",
-    "pages/index/qixingcai"
+    "pages/index/qixingcai",
+    "pages/index/result",
+    "pages/index/detail"
   ],
   "subPackages": [],
   "window": {
@@ -35,5 +37,6 @@
       }
     ]
   },
-  "usingComponents": {}
+  "usingComponents": {},
+  "sitemapLocation": "sitemap24.json"
 }
