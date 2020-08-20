@@ -196,6 +196,13 @@
 					ball: arr
 				}
 				this.$http.post('/api/colorful/result', params).then(res => {
+					if(res.data.returnCode==='999999'){
+						uni.showToast({
+							icon:'none',
+							title:'所选注数不能超过500注！'
+						})
+						return
+					}
 					uni.navigateTo({
 						url: '/pages/index/result?type=3&ballList=' + encodeURIComponent(JSON.stringify(arr)) + '&result=' +
 							encodeURIComponent(JSON.stringify(res.data))
@@ -378,7 +385,7 @@
 		padding:10rpx;
 		border-radius: 10rpx;
 		border: 1px solid #fff;
-		max-height: 40vh;
+		max-height: 30vh;
 		box-sizing: border-box;
 		overflow: hidden;
 	}

@@ -85,8 +85,6 @@
           align-items: flex-start;
   -webkit-justify-content: space-around;
           justify-content: space-around;
-  background: #fff;
-  border-radius: 20rpx;
   color: #333;
 }
 .table .cell.data-v-6d15d7f3 {
@@ -127,8 +125,16 @@
   padding: 10rpx;
   border-radius: 10rpx;
   border: 1px solid #fff;
-  max-height: 40vh;
+  max-height: 30vh;
   box-sizing: border-box;
+  overflow: hidden;
+}
+.my-scroll-view2.data-v-6d15d7f3 {
+  padding: 10rpx;
+  border-radius: 10rpx;
+  box-sizing: border-box;
+  background: #fff;
+  max-height: 45vh;
   overflow: hidden;
 }
 button.data-v-6d15d7f3 {

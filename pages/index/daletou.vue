@@ -223,6 +223,13 @@
 						blue: this.blueList.join(',')
 					}
 					this.$http.post('/api/lottery/result', params).then(res => {
+						if(res.data.returnCode==='999999'){
+							uni.showToast({
+								icon:'none',
+								title:'所选注数不能超过500注！'
+							})
+							return
+						}
 						uni.navigateTo({
 							url: '/pages/index/result?type=2&result=' + encodeURIComponent(JSON.stringify(res.data))
 						});

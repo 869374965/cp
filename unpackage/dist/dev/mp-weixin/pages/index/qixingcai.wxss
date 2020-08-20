@@ -179,7 +179,7 @@
   padding: 10rpx;
   border-radius: 10rpx;
   border: 1px solid #fff;
-  max-height: 40vh;
+  max-height: 30vh;
   box-sizing: border-box;
   overflow: hidden;
 }
