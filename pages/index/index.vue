@@ -73,7 +73,7 @@
 			<view class="btn" @click="toList(3)">历史开奖</view>
 		</view>
 
-		<button type="default" @click="toChoose">推荐高概率号码</button>
+		<button type="default" @click="toChoose">输入您的号码开始对比历史记录</button>
 	</view>
 </template>
 

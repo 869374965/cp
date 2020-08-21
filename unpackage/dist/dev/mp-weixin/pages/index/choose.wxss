@@ -53,4 +53,10 @@
   height: 120rpx;
   margin-right: 50rpx;
 }
+.title.data-v-07c9f8ed {
+  color: #fff;
+  text-align: center;
+  margin: 50rpx auto;
+  font-size: 36rpx;
+}
 

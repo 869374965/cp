@@ -15,7 +15,7 @@
 			</scroll-view>
 		</view>
 
-		<view class="title">历史开出详情</view>
+		<view class="title">在对比历史开奖记录中出现过的次数详情</view>
 
 
 		<!-- 双色球 -->
@@ -171,7 +171,7 @@
 		</scroll-view>
 
 		<view class="title">
-			根据大数据计算，为您推荐两组号码为：
+			根据大数据计算，为您推荐两组高概率中奖号码：
 		</view>
 		<view class="result-wrap">
 			<view class="ball-wrap">
