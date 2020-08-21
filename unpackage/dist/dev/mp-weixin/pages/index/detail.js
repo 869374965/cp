@@ -182,7 +182,7 @@ var _default =
   data: function data() {
     return {
       list: [],
-      loadingType: 'nomore',
+      loadingType: 'loading',
       pageNum: 0,
       pageSize: 10,
       url: '',
@@ -209,10 +209,13 @@ var _default =
     this.list = JSON.parse(decodeURIComponent(options.list)).reverse();
 
   },
-  created: function created() {
+  created: function created() {var _this = this;
+    setTimeout(function () {
+      _this.loadingType = "nomore";
+    }, 2000);
   },
   methods: {
-    loadData: function loadData() {var _this = this;
+    loadData: function loadData() {var _this2 = this;
       return;
       if (this.loadingType === 'loading') {
         //防止重复加载
@@ -226,13 +229,13 @@ var _default =
 
       this.$http.post(this.url, params).then(function (res) {
         if (!res.data.list) {
-          _this.loadingType = 'nomore';
+          _this2.loadingType = 'nomore';
         }
 
-        _this.list = _this.list.concat(res.data.list);
-        _this.loadingType = 'more';
+        _this2.list = _this2.list.concat(res.data.list);
+        _this2.loadingType = 'more';
         if (res.data.list.length === 0) {
-          _this.loadingType = 'nomore';
+          _this2.loadingType = 'nomore';
         }
       });
     } } };exports.default = _default;

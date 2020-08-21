@@ -46,7 +46,7 @@
 		data() {
 			return {
 				list:[],
-				loadingType:'nomore',
+				loadingType:'loading',
 				pageNum:0,
 				pageSize:10,
 				url:'',
@@ -74,6 +74,9 @@
 
 		},
 		created() {
+			setTimeout(()=>{
+				this.loadingType="nomore"
+			},2000)
 		},
 		methods:{
 			loadData(){
