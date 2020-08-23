@@ -5,7 +5,7 @@
 				<view class="page-section-spacing">
 					<swiper class="swiper" :indicator-dots="true" :autoplay="true" :interval="2000" :duration="500" :circular="true" indicator-active-color="#fff">
 						<swiper-item v-for="(item,i) in images" :key="i">
-							<image class="swiper-image" src="https://img.xiaopiu.com/userImages/img44193173b89a9bd8.jpg"></image>
+							<image class="swiper-image" :src="item.url"></image>
 						</swiper-item>
 					</swiper>
 				</view>
