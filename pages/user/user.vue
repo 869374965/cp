@@ -36,7 +36,7 @@
 				uni.showModal({
 					title: '联系我们',
 					showCancel:false,
-					content: '请添加客服微信：xxxxxx'
+					content: '请添加客服微信：fandeng100'
 				})
 			},
 			pop() {

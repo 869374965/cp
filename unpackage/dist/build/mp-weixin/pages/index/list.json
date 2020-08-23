@@ -1,9 +1,5 @@
 {
-<<<<<<< HEAD
-  "usingComponents": {}
-=======
   "usingComponents": {
     "uni-load-more": "/components/uni-load-more/uni-load-more"
   }
->>>>>>> c5af55cb4bba0cdb1e86287f705c59c5cfb92a56
 }

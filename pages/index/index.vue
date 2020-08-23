@@ -74,6 +74,7 @@
 		</view>
 
 		<button type="default" @click="toChoose">输入您的号码开始对比历史记录</button>
+		<text class="tip">数据来源：中国福彩网、中国体彩网、彩票数据网站，请以福彩、体彩官网公布的数据为准</text>
 	</view>
 </template>
 
@@ -234,5 +235,12 @@
 		color: #fff;
 		padding: 0 20rpx;
 		margin: 40rpx 20rpx 20rpx;
+	}
+	
+	.tip{
+		display: block;
+		padding:10rpx 20rpx;
+		font-size:28rpx;
+		color:#fff;
 	}
 </style>

@@ -5,27 +5,6 @@
 	},
 	"setting": {
 		"urlCheck": false,
-<<<<<<< HEAD
-		"scopeDataCheck": false,
-		"coverView": true,
-		"es6": true,
-		"postcss": true,
-		"compileHotReLoad": false,
-		"preloadBackgroundData": false,
-		"minified": true,
-		"autoAudits": false,
-		"newFeature": false,
-		"uglifyFileName": false,
-		"uploadWithSourceMap": true,
-		"useIsolateContext": true,
-		"nodeModules": false,
-		"enhance": false,
-		"useCompilerModule": false,
-		"userConfirmedUseCompilerModuleSwitch": false,
-		"showShadowRootInWxmlPanel": true,
-		"checkInvalidKey": true,
-		"checkSiteMap": true,
-=======
 		"es6": true,
 		"enhance": false,
 		"postcss": true,
@@ -42,28 +21,19 @@
 		"checkSiteMap": true,
 		"uploadWithSourceMap": true,
 		"compileHotReLoad": false,
->>>>>>> c5af55cb4bba0cdb1e86287f705c59c5cfb92a56
 		"babelSetting": {
 			"ignore": [],
 			"disablePlugins": [],
 			"outputPath": ""
-<<<<<<< HEAD
-		}
-=======
 		},
 		"useIsolateContext": true,
-		"useCompilerModule": true,
+		"useCompilerModule": false,
 		"userConfirmedUseCompilerModuleSwitch": false
->>>>>>> c5af55cb4bba0cdb1e86287f705c59c5cfb92a56
 	},
 	"compileType": "miniprogram",
 	"libVersion": "",
 	"appid": "wxbaa62a5df18c11ee",
-<<<<<<< HEAD
-	"projectname": "%E9%B1%BC%E5%AD%90%E5%BD%A9",
-=======
-	"projectname": "cp",
->>>>>>> c5af55cb4bba0cdb1e86287f705c59c5cfb92a56
+	"projectname": "鱼子彩",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"condition": {
