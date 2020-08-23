@@ -4,7 +4,7 @@
 			<view class="page-section swiper">
 				<view class="page-section-spacing">
 					<swiper class="swiper" :indicator-dots="true" :autoplay="true" :interval="2000" :duration="500" :circular="true" indicator-active-color="#fff">
-						<swiper-item v-for="(item,i) in 3" :key="i">
+						<swiper-item v-for="(item,i) in images" :key="i">
 							<image class="swiper-image" src="https://img.xiaopiu.com/userImages/img44193173b89a9bd8.jpg"></image>
 						</swiper-item>
 					</swiper>
@@ -20,10 +20,18 @@
 	export default {
 		data() {
 			return {
-
+				images: [],
 			};
 		},
+		onShow() {
+			this.getSwiper()
+		},
 		methods: {
+			getSwiper() {
+				this.$http.post('/api/picture/all').then(res => {
+					this.images = res.data;
+				})
+			},
 			connect() {
 				uni.showModal({
 					title: '联系我们',

@@ -6,7 +6,13 @@
     "pages/index/choose",
     "pages/index/shuangseqiu",
     "pages/index/daletou",
+<<<<<<< HEAD
     "pages/index/qixingcai"
+=======
+    "pages/index/qixingcai",
+    "pages/index/result",
+    "pages/index/detail"
+>>>>>>> c5af55cb4bba0cdb1e86287f705c59c5cfb92a56
   ],
   "subPackages": [],
   "window": {

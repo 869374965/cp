@@ -1,22 +1,43 @@
 <template>
 	<view class="wrap">
-		<view class="cell-wrap" v-for="(item,i) in 10" :key="i">
-			<view class="cell">
-				<view class="title-wrap">
-					<text class="name">第2000071期</text>
-					<text class="time">2020-08-03</text>
-				</view>
-				<view class="ball-wrap">
-					<text class="ball red">01</text>
-					<text class="ball red">23</text>
-					<text class="ball red">13</text>
-					<text class="ball red">11</text>
-					<text class="ball red">25</text>
-					<text class="ball red">09</text>
-					<text class="ball blue">08</text>
+		<scroll-view class="my-scroll-view" scroll-y @scrolltolower="loadData">
+			<view class="cell-wrap" v-for="(item,i) in list" :key="i">
+				<view class="cell">
+					<view class="title-wrap">
+						<text class="name">第{{item.id}}期</text>
+						<text class="time">{{item.time}}</text>
+					</view>
+					<view class="ball-wrap" v-if="type===1">
+						<text class="ball red">{{item.redFirst}}</text>
+						<text class="ball red">{{item.redSecond}}</text>
+						<text class="ball red">{{item.redThird}}</text>
+						<text class="ball red">{{item.redFour}}</text>
+						<text class="ball red">{{item.redFive}}</text>
+						<text class="ball red">{{item.redSix}}</text>
+						<text class="ball blue">{{item.blue}}</text>
+					</view>
+					<view class="ball-wrap" v-if="type===2">
+						<text class="ball red">{{item.redFirst}}</text>
+						<text class="ball red">{{item.redSecond}}</text>
+						<text class="ball red">{{item.redThird}}</text>
+						<text class="ball red">{{item.redFour}}</text>
+						<text class="ball red">{{item.redFive}}</text>
+						<text class="ball blue">{{item.blueFirst}}</text>
+						<text class="ball blue">{{item.blueSecond}}</text>
+					</view>
+					<view class="ball-wrap" v-if="type===3">
+						<text class="ball red">{{item.redFirst}}</text>
+						<text class="ball red">{{item.blueFirst}}</text>
+						<text class="ball red">{{item.redSecond}}</text>
+						<text class="ball red">{{item.blueSecond}}</text>
+						<text class="ball red">{{item.redThird}}</text>
+						<text class="ball red">{{item.blueThird}}</text>
+						<text class="ball red">{{item.redFour}}</text>
+					</view>
 				</view>
 			</view>
-		</view>
+			<uni-load-more :status="loadingType"></uni-load-more>
+		</scroll-view>
 	</view>
 </template>
 
@@ -24,39 +45,75 @@
 	export default {
 		data() {
 			return {
-
+				list:[],
+				loadingType:'more',
+				pageNum:0,
+				pageSize:10,
+				url:'',
+				type:''
 			};
 		},
 		onLoad(options){
-			if(options.type==='1'){
+			console.log(options)
+			if(options.type=='1'){
 				uni.setNavigationBarTitle({
 					title: '双色球历史开奖'
 				});
-			}else if(options.type==='2'){
+				this.type=1;
+				this.url='/api/two/all'
+			}else if(options.type=='2'){
 				uni.setNavigationBarTitle({
 					title: '大乐透历史开奖'
 				});
+				this.type=2;
+				this.url='/api/lottery/all'
 			}else{
 				uni.setNavigationBarTitle({
 					title: '七星彩历史开奖'
 				});
+				this.type=3;
+				this.url='/api/colorful/all'
 			}
-
+			this.loadData()
 		},
-		created() {
-			uni.setNavigationBarTitle({
-				title: '双色球历史开奖'
-			});
+		methods:{
+			loadData(){
+				if (this.loadingType === 'loading') {
+					//防止重复加载
+					return;
+				}
+				this.pageNum++
+				this.loadingType = 'loading';
+				let params = {
+					pageSize:this.pageSize,
+					pageNum:this.pageNum
+				}
+				console.log(this.url)
+				this.$http.post(this.url,params).then(res => {
+					if (!res.data.list) {
+						this.loadingType = 'nomore';
+					}
+					
+					this.list = this.list.concat(res.data.list);
+					this.loadingType = 'more'
+					if (res.data.list.length === 0) {
+						this.loadingType = 'nomore';
+					}
+				})
+			}
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
 	.wrap {
-		min-height: 100vh;
+		height: 100vh;
 		padding: 1rpx 0;
 		width: 100vw;
 		background: $bgColor;
+	}
+	.my-scroll-view{
+		height: 100%;
 	}
 
 	.cell-wrap {
@@ -118,7 +175,7 @@
 		height: 50rpx;
 		padding: 10rpx;
 		border-radius: 50rpx;
-		font-size: 24rpx;
+		font-size: 34rpx;
 
 		&:not(:first-child) {
 			margin-left: 10rpx;

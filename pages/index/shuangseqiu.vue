@@ -5,13 +5,19 @@
 			<text class="ball red" :class="item.checked?'checked':''" @click="chooseRed(item)" v-for="(item,i) in allRed" :key="i">{{item.num}}</text>
 		</view>
 		<view class="bottom">
-			<text class="ball blue" v-for="(item,i) in allBlue" :key="i">{{item.num}}</text>
+			<text class="ball blue" :class="item.checked?'checked':''" v-for="(item,i) in allBlue" :key="i" @click="chooseBlue(item)">{{item.num}}</text>
 		</view>
 
 		<view class="title" v-if="redList.length>0">您的选号</view>
 		<view class="result" v-if="redList.length>0">
 			<text class="ball red" v-for="(item,i) in redList" :key="i">{{item}}</text>
+			<text class="ball blue" v-for="(item,i) in blueList" :key="i">{{item}}</text>
 		</view>
+		<view class="clear" @click="clear">
+			<image src="../../static/image/lajix.svg" mode=""></image>
+			<text>清空选号</text>
+		</view>
+		<button class="btn" type="warn" @click.native="nextStep" :disabled="disabled">下一步</button>
 	</view>
 </template>
 
@@ -19,6 +25,7 @@
 	export default {
 		data() {
 			return {
+				disabled:true,
 				allRed: [{
 					num: '01',
 					checked: false
@@ -115,6 +122,9 @@
 				},{
 					num: '32',
 					checked: false
+				},{
+					num: '33',
+					checked: false
 				}],
 				allBlue: [{
 					num: '01',
@@ -166,8 +176,24 @@
 					checked: false
 				}],
 				redList: [],
-				blue: ''
+				blueList: []
 			};
+		},
+		watch:{
+			redList(v){
+				if(v.length>5 && this.blueList.length>0){
+					this.disabled=false
+				}else{
+					this.disabled=true
+				}
+			},
+			blueList(v){
+				if(v.length>0 && this.redList.length>5){
+					this.disabled=false
+				}else{
+					this.disabled=true
+				}
+			}
 		},
 		methods: {
 			chooseRed(item) {
@@ -177,6 +203,52 @@
 					return
 				}
 				this.redList.push(item.num)
+			},
+			
+			chooseBlue(item) {
+				item.checked = !item.checked
+				if(!item.checked){
+					this.blueList.remove(item.num)
+					return
+				}
+				this.blueList.push(item.num)
+			},
+			
+			nextStep(){
+				if(this.disabled){
+					uni.showToast({
+						icon:'none',
+						title:'请至少选择6个红球，1个蓝球！'
+					})
+				}else{
+					this.$http.post('/api/point/save',{type:'s-find'})
+					let params = {
+						red:this.redList.join(','),
+						blue:this.blueList.join(',')
+					}
+					this.$http.post('/api/two/result',params).then(res => {
+						if(res.data.returnCode==='999999'){
+							uni.showToast({
+								icon:'none',
+								title:'所选注数不能超过500注！'
+							})
+							return
+						}
+						uni.navigateTo({
+							url: '/pages/index/result?type=1&result=' + encodeURIComponent(JSON.stringify(res.data))
+						});
+					})
+				}
+			},
+			clear(){
+				this.redList=[];
+				this.blueList=[];
+				this.allRed.forEach(v=>{
+					v.checked=false
+				})
+				this.allBlue.forEach(v=>{
+					v.checked=false
+				})
 			}
 		}
 	}
@@ -211,17 +283,17 @@
 	}
 
 	.ball {
-		width: 40rpx;
-		height: 40rpx;
+		width: 60rpx;
+		height: 60rpx;
 		padding: 10rpx;
-		font-size: 26rpx;
+		font-size: 36rpx;
 		font-weight: bold;
-		border-radius: 40rpx;
+		border-radius: 60rpx;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		background: #fff;
-		margin: 16rpx;
+		margin: 10rpx;
 
 		&.red {
 			color: red;
@@ -234,7 +306,7 @@
 		&.blue {
 			color: #2a82e4;
 			&.checked{
-				background:2a82e4;
+				background:#2a82e4;
 				color:#fff;
 			}
 		}
@@ -251,5 +323,25 @@
 	.result {
 		display: flex;
 		flex-flow: row wrap;
+	}
+	
+	.btn{
+		margin: 40rpx 0;
+		width:100%;
+	}
+	
+	.clear{
+		position:absolute;
+		top:20rpx;
+		right:20rpx;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 26rpx;
+		color:$bgColor;
+		image{
+			width: 30rpx;
+			height: 30rpx;
+		}
 	}
 </style>

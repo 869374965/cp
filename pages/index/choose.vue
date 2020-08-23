@@ -14,6 +14,9 @@
 			<image src="../../static/image/qixingcai.jpg"></image>
 			<text>七星彩</text>
 		</view>
+		
+		
+		<view class="title">选择您要对比的彩票种类</view>
 	</view>
 </template>
 
@@ -71,5 +74,12 @@
 				margin-right: 50rpx;
 			}
 		
+	}
+	
+	.title{
+		color:#fff;
+		text-align: center;
+		margin: 50rpx auto;
+		font-size: 36rpx;
 	}
 </style>
