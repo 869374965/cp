@@ -76,3 +76,14 @@ $uni-color-paragraph: #3F536E; // 文章段落颜色
 $uni-font-size-paragraph:30rpx;
 
 	$bgColor:#ff5733;
+	
+	.tip{
+		display: block;
+		padding:10rpx 20rpx;
+		font-size:28rpx;
+		color:#fff;
+	}
+	
+	.black{
+		color:#333
+	}

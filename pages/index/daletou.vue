@@ -1,6 +1,6 @@
 <template>
 	<view class="wrap">
-		<text class="tip">至少选择5个红球，2个蓝球</text>
+		<text class="my-tip">至少选择5个红球，2个蓝球</text>
 		<view class="top">
 			<text class="ball red" :class="item.checked?'checked':''" @click="chooseRed(item)" v-for="(item,i) in allRed" :key="i">{{item.num}}</text>
 		</view>
@@ -18,6 +18,7 @@
 			<text>清空选号</text>
 		</view>
 		<button class="btn" type="warn" @click.native="nextStep" :disabled="disabled">下一步</button>
+		<text class="tip black">声明：方案呈现为模型计算结果。仅供参考，我们不提供彩票销售，购彩请到线下彩票店。</text>
 	</view>
 </template>
 
@@ -259,7 +260,7 @@
 		background: rgba(229, 229, 229, 1);
 	}
 
-	.tip {
+	.my-tip {
 		display: flex;
 		font-size: 26rpx;
 		padding: 0 20rpx 20rpx;

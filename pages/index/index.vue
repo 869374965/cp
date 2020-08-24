@@ -3,10 +3,12 @@
 		<view class="uni-padding-wrap">
 			<view class="page-section swiper">
 				<view class="page-section-spacing">
-					<swiper class="swiper" :indicator-dots="true" :autoplay="true" :interval="2000" :duration="500" :circular="true"
+					<swiper class="swiper" :indicator-dots="true" :autoplay="true" :interval="4000" :duration="1000" :circular="true"
 					 indicator-active-color="#fff">
 						<swiper-item v-for="(item,i) in images" :key="i">
-							<image class="swiper-image" :src="item.url"></image>
+							<!-- <image v-if="item" class="swiper-image" src="../../static/image/bg.png"></image> -->
+							<image v-if="item" class="swiper-image" :src="item.url"></image>
+							<image v-else class="swiper-image" src="../../static/image/bg.png"></image>
 						</swiper-item>
 					</swiper>
 				</view>
@@ -74,7 +76,7 @@
 		</view>
 
 		<button type="default" @click="toChoose">输入您的号码开始对比历史记录</button>
-		<text class="tip">数据来源：中国福彩网、中国体彩网、彩票数据网站，请以福彩、体彩官网公布的数据为准</text>
+		<text class="tip">声明：方案呈现为模型计算结果。仅供参考，我们不提供彩票销售，购彩请到线下彩票店。</text>
 	</view>
 </template>
 
@@ -152,10 +154,11 @@
 	.swiper-image {
 		width: 100%;
 		height: 100%;
+		object-fit: cover;
 	}
 
 	swiper {
-		height: 260rpx;
+		height: 300rpx;
 	}
 
 	.cell-wrap {
@@ -237,10 +240,5 @@
 		margin: 40rpx 20rpx 20rpx;
 	}
 	
-	.tip{
-		display: block;
-		padding:10rpx 20rpx;
-		font-size:28rpx;
-		color:#fff;
-	}
+
 </style>

@@ -3,9 +3,10 @@
 		<view class="uni-padding-wrap">
 			<view class="page-section swiper">
 				<view class="page-section-spacing">
-					<swiper class="swiper" :indicator-dots="true" :autoplay="true" :interval="2000" :duration="500" :circular="true" indicator-active-color="#fff">
+					<swiper class="swiper" :indicator-dots="true" :autoplay="true" :interval="4000" :duration="1000" :circular="true" indicator-active-color="#fff">
 						<swiper-item v-for="(item,i) in images" :key="i">
-							<image class="swiper-image" :src="item.url"></image>
+							<image v-if="item" class="swiper-image" :src="item.url"></image>
+							<image v-else class="swiper-image" src="../../static/image/bg.png"></image>
 						</swiper-item>
 					</swiper>
 				</view>
@@ -57,12 +58,14 @@
 		background: #f5f5f5;
 	}
 	
-	.swiper-image{
+	.swiper-image {
 		width: 100%;
 		height: 100%;
+		object-fit: cover;
 	}
+	
 	swiper {
-		height: 260rpx;
+		height: 300rpx;
 	}
 	
 	

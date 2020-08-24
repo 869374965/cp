@@ -1,6 +1,6 @@
 <template>
 	<view class="wrap">
-		<text class="tip">每个位置至少选择1个球</text>
+		<text class="my-tip">每个位置至少选择1个球</text>
 		<view class="top">
 			<view class="cell">
 				<text class="name">第1位</text>
@@ -69,6 +69,7 @@
 			<button class="btn" type="warn" @click.native="nextStep" :disabled="disabled">确定选号</button>
 			<button class="btn" type="default" @click.native="search" :disabled="disabled2">查询</button>
 		</div>
+		<text class="tip black">声明：方案呈现为模型计算结果。仅供参考，我们不提供彩票销售，购彩请到线下彩票店。</text>
 	</view>
 </template>
 
@@ -261,7 +262,7 @@
 		background: rgba(229, 229, 229, 1);
 	}
 
-	.tip {
+	.my-tip {
 		display: flex;
 		font-size: 26rpx;
 		margin-bottom: 20rpx;

@@ -171,7 +171,7 @@
 		</scroll-view>
 
 		<view class="title">
-			根据大数据计算，为您推荐两组高概率中奖号码：
+			根据大数据计算，为您提供两组高概率中奖号码：
 		</view>
 		<view class="result-wrap">
 			<view class="ball-wrap">
@@ -184,6 +184,8 @@
 			</view>
 		</view>
 		<button class="btn" type="default" @click.native="getRandom">换一换</button>
+		
+		<text class="tip" style="padding:0;">声明：方案呈现为模型计算结果。仅供参考，我们不提供彩票销售，购彩请到线下彩票店。</text>
 	</view>
 </template>
 
