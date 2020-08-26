@@ -45,41 +45,47 @@
 	export default {
 		data() {
 			return {
-				list:[],
-				loadingType:'loading',
-				pageNum:0,
-				pageSize:10,
-				url:'',
-				type:''
+				list: [],
+				loadingType: 'loading',
+				pageNum: 0,
+				pageSize: 10,
+				url: '',
+				type: ''
 			};
 		},
-		onLoad(options){
-			if(options.type=='1'){
-				uni.setNavigationBarTitle({
-					title: '双色球历史开奖'
-				});
-				this.type=1;
-			}else if(options.type=='2'){
-				uni.setNavigationBarTitle({
-					title: '大乐透历史开奖'
-				});
-				this.type=2;
-			}else{
-				uni.setNavigationBarTitle({
-					title: '七星彩历史开奖'
-				});
-				this.type=3;
-			}
-			this.list = JSON.parse(decodeURIComponent(options.list)).reverse()
+		onLoad(options) {
+			uni.getStorage({
+				key: 'list',
+				success: (res) => {
+					if (options.type == '1') {
+						uni.setNavigationBarTitle({
+							title: '双色球历史开奖'
+						});
+						this.type = 1;
+					} else if (options.type == '2') {
+						uni.setNavigationBarTitle({
+							title: '大乐透历史开奖'
+						});
+						this.type = 2;
+					} else {
+						uni.setNavigationBarTitle({
+							title: '七星彩历史开奖'
+						});
+						this.type = 3;
+					}
+					this.list = JSON.parse(decodeURIComponent(res.data)).reverse()
+				}
+			})
+
 
 		},
 		created() {
-			setTimeout(()=>{
-				this.loadingType="nomore"
-			},2000)
+			setTimeout(() => {
+				this.loadingType = "nomore"
+			}, 2000)
 		},
-		methods:{
-			loadData(){
+		methods: {
+			loadData() {
 				return
 				if (this.loadingType === 'loading') {
 					//防止重复加载
@@ -88,14 +94,14 @@
 				this.pageNum++
 				this.loadingType = 'loading';
 				let params = {
-					pageSize:this.pageSize,
-					pageNum:this.pageNum
+					pageSize: this.pageSize,
+					pageNum: this.pageNum
 				}
-				this.$http.post(this.url,params).then(res => {
+				this.$http.post(this.url, params).then(res => {
 					if (!res.data.list) {
 						this.loadingType = 'nomore';
 					}
-					
+
 					this.list = this.list.concat(res.data.list);
 					this.loadingType = 'more'
 					if (res.data.list.length === 0) {
@@ -114,7 +120,8 @@
 		width: 100vw;
 		background: $bgColor;
 	}
-	.my-scroll-view{
+
+	.my-scroll-view {
 		height: 100%;
 	}
 

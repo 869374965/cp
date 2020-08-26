@@ -204,10 +204,19 @@
 						})
 						return
 					}
-					uni.navigateTo({
-						url: '/pages/index/result?type=3&ballList=' + encodeURIComponent(JSON.stringify(arr)) + '&result=' +
-							encodeURIComponent(JSON.stringify(res.data))
+					uni.setStorage({
+					    key: 'result',
+					    data: encodeURIComponent(JSON.stringify(res.data)),
+					    success:  ()=> {
+							uni.navigateTo({
+								url: '/pages/index/result?type=3'
+							});
+					    }
 					});
+					// uni.navigateTo({
+					// 	url: '/pages/index/result?type=3&ballList=' + encodeURIComponent(JSON.stringify(arr)) + '&result=' +
+					// 		encodeURIComponent(JSON.stringify(res.data))
+					// });
 				})
 			},
 			clearChecked() {

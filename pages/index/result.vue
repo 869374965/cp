@@ -208,35 +208,42 @@
 			};
 		},
 		onLoad(options) {
-			this.result = JSON.parse(decodeURIComponent(options.result))
-			if (options.type === '1') {
-				uni.setNavigationBarTitle({
-					title: '双色球选号去重结果'
-				});
-				this.type = 1;
-				this.url = '/api/two/random'
-				this.result.red = this.result.red.split(',')
-				this.result.blue = this.result.blue.split(',')
-			} else if (options.type === '2') {
-				uni.setNavigationBarTitle({
-					title: '大乐透选号去重结果'
-				});
-				this.type = 2;
-				this.url = '/api/lottery/random'
-				this.result.red = this.result.red.split(',')
-				this.result.blue = this.result.blue.split(',')
-			} else {
-				uni.setNavigationBarTitle({
-					title: '七星彩选号去重结果'
-				});
-				this.type = 3;
-				this.url = '/api/colorful/random'
-				this.ballList = JSON.parse(decodeURIComponent(options.ballList)).map(item => {
-					return item.split(',')
-				})
-				console.log(this.ballList)
-			}
-			this.getRandom()
+			uni.getStorage({
+			    key: 'result',
+			    success:  (res)=> {
+					// this.result = JSON.parse(decodeURIComponent(options.result))
+					this.result = JSON.parse(decodeURIComponent(res.data))
+					if (options.type === '1') {
+						uni.setNavigationBarTitle({
+							title: '双色球选号去重结果'
+						});
+						this.type = 1;
+						this.url = '/api/two/random'
+						this.result.red = this.result.red.split(',')
+						this.result.blue = this.result.blue.split(',')
+					} else if (options.type === '2') {
+						uni.setNavigationBarTitle({
+							title: '大乐透选号去重结果'
+						});
+						this.type = 2;
+						this.url = '/api/lottery/random'
+						this.result.red = this.result.red.split(',')
+						this.result.blue = this.result.blue.split(',')
+					} else {
+						uni.setNavigationBarTitle({
+							title: '七星彩选号去重结果'
+						});
+						this.type = 3;
+						this.url = '/api/colorful/random'
+						this.ballList = JSON.parse(decodeURIComponent(options.ballList)).map(item => {
+							return item.split(',')
+						})
+						console.log(this.ballList)
+					}
+					this.getRandom()
+			    }
+			});
+			
 		},
 		methods: {
 			getRandom() {
@@ -279,9 +286,18 @@
 					})
 					return
 				}
-				uni.navigateTo({
-					url: `/pages/index/detail?type=${this.type}&list=${encodeURIComponent(JSON.stringify(list))}`
+				uni.setStorage({
+				    key: 'list',
+				    data: encodeURIComponent(JSON.stringify(list)),
+				    success:  ()=> {
+						uni.navigateTo({
+							url: `/pages/index/detail?type=${this.type}`
+						});
+				    }
 				});
+				// uni.navigateTo({
+				// 	url: `/pages/index/detail?type=${this.type}&list=${encodeURIComponent(JSON.stringify(list))}`
+				// });
 			}
 		}
 	}
